@@ -29,6 +29,10 @@ function noteEdits() {
             });
         });
     }
+
+    for (var b = 0; b < document.querySelectorAll(".tab").length; b++) {
+        document.querySelectorAll(".tab")[b].children[0];
+    }
 }
 
 noteEdits();

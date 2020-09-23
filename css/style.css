@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
 %name - reusable styles (used @extend %name)
 @mixin name - function (used @include name(param))
@@ -20,7 +21,7 @@ $name - variable
   margin: auto;
 }
 
-.menu .new-check, .menu .new-note {
+.group-active-i, .tabs .tab:hover:after, .menu .new-check, .menu .new-note {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -70,7 +71,7 @@ body {
   position: relative;
   word-wrap: break-word;
 }
-.wrap .sidebar .group svg {
+.wrap .sidebar .group .group-edit {
   position: absolute;
   border-radius: 100%;
   height: 20px;
@@ -85,7 +86,7 @@ body {
   transform: rotate(10deg);
   background: white;
 }
-.wrap .sidebar .group:hover svg {
+.wrap .sidebar .group:hover .group-edit {
   animation: 0.3s edit ease-in-out;
   animation-fill-mode: forwards;
 }
@@ -123,28 +124,65 @@ body {
   background: purple;
 }
 
+.group-active-i {
+  left: -30px;
+  height: 20px;
+  opacity: 0;
+}
+
+.group-active .group-active-i {
+  opacity: 1;
+}
+
 .tabs {
   background: #dedede;
   position: absolute;
-  border-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   height: 3vh;
   width: calc(100% - 10vh - 5px);
   right: 0;
   display: flex;
   justify-content: flex-start;
-  padding: 0.5vh;
   box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
-.tabs .active-group {
-  background: green;
+.tabs .tab {
+  background: #ffffff;
   font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
-  padding-left: 3px;
-  padding-right: 3px;
-  height: 2vh;
+  padding-left: 9px;
+  padding-right: 29px;
+  height: 3vh;
   box-sizing: border-box;
-  border-radius: 5px;
   overflow: none;
-  color: white;
+  color: #545454;
+  border-right: 1px solid #cdcdcd;
+  font-family: monospace;
+  font-weight: 700;
+  line-height: 3vh;
+  cursor: pointer;
+  position: relative;
+}
+.tabs .tab:hover:after {
+  content: "×";
+  font-size: 25px;
+  top: -1px;
+  right: 9px;
+}
+.tabs .active-tab {
+  background: #ccc;
+}
+
+.active {
+  background: #ccc;
+  height: calc(100% - 3vh);
+  width: calc(100% - 10vh - 5px);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .menu {

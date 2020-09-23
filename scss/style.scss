@@ -7,7 +7,10 @@ $group-green: green;
 $group-blue: blue;
 $group-purple: purple;
 
+$gray: #545454;
+
 $group-stack: "Ubuntu", "Work Sans", monospace, sans-serif;
+$primary-stack: "Work Sans", "Ubuntu", sans-serif;
 
 
 * {
@@ -52,7 +55,7 @@ body {
             margin: 10px;
             position: relative;
             word-wrap: break-word;
-            svg {
+            .group-edit {
                 position: absolute;
                 // border: 2px solid #444;
                 border-radius: 100%;
@@ -60,7 +63,7 @@ body {
                 width: 20px;
                 right: -5px;
                 bottom: -5px;
-                color: #545454;
+                color:$gray;
                 transition: 0.2s;
                 opacity: 0;
                 padding: 3px;
@@ -68,7 +71,7 @@ body {
                 transform: rotate(10deg);
                 background: white;
             }
-            &:hover svg {
+            &:hover .group-edit {
                 animation: 0.3s edit ease-in-out;
                 animation-fill-mode: forwards;
             }
@@ -109,28 +112,69 @@ body {
     }
 }
 
+.group-active-i {
+    @extend %center-y;
+    left: -30px;
+    height: 20px;
+    opacity: 0;
+}
+.group-active .group-active-i {
+    opacity: 1;
+}
+
 .tabs {
     background: #dedede;
     position: absolute;
-    border-radius: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     height: 3vh;
     width: calc(100% - 10vh - 5px);
     right: 0;
     display: flex;
     justify-content: flex-start;
-    padding: 0.5vh;
+    // display: inline-block;
+    // padding-top: 0.5vh;
+    // padding-left: 0.5vh;
     box-sizing: border-box;
-    .active-group {
-        background: $group-green;
+    overflow-x: auto;
+    overflow-y: hidden;
+    .tab {
+        background: #ffffff;
         font-family: $group-stack;
-        padding-left: 3px;
-        padding-right: 3px;
-        height: 2vh;
+        padding-left: 9px;
+        padding-right: 29px;
+        height: 3vh;
         box-sizing: border-box;
-        border-radius: 5px;
         overflow: none;
-        color: white;
+        color: $gray;
+        border-right: 1px solid #cdcdcd;
+        font-family: monospace;
+        font-weight: 700;
+        line-height: 3vh;
+        cursor: pointer;
+        position: relative;
+        &:hover:after {
+            content: '\00D7';
+            font-size: 25px;
+            @extend %center-y;
+            top: -1px;
+            right: 9px;
+        }
     }
+    .active-tab {
+        background: #ccc;
+    }
+}
+
+.active {
+    background: #ccc;
+    height: calc(100% - 3vh);
+    width: calc(100% - 10vh - 5px);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .menu {
@@ -156,7 +200,7 @@ body {
         svg {
             height: 80%;
             @extend %center;
-            color: #545454;
+            color:$gray;
         }
     }
     .new-check, .new-note {
@@ -174,7 +218,7 @@ body {
         svg {
             height: 60%;
             @extend %center;
-            color: #545454;
+            color:$gray;
         }
     }
     .new-check {
