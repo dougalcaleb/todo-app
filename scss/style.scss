@@ -1,4 +1,12 @@
-@use "_ext";
+@use "ext";
+
+$group-red: red;
+$group-orange: orange;
+$group-yellow: yellow;
+$group-green: green;
+$group-blue: blue;
+$group-purple: purple;
+
 
 * {
     user-select: none;
@@ -15,4 +23,125 @@ body {
     background-size: cover;
     background-position: center center;
     filter: blur(5px);
+}
+
+.wrap {
+    height: 40vw;
+    width: 60vw;
+    background: rgba(150, 150, 150, 0.25);
+    @extend %center;
+    border-radius: 5px;
+    overflow: hidden;
+    .sidebar {
+        height: 40vw;
+        width: 5vw;
+        background: #dedede;
+        position: absolute;
+        border-radius: 5px;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .group {
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            padding: 10px;
+            margin: 10px;
+            position: relative;
+            svg {
+                position: absolute;
+                // border: 2px solid #444;
+                border-radius: 100%;
+                height: 20px;
+                width: 20px;
+                right: -5px;
+                bottom: -5px;
+                color: #545454;
+                transition: 0.2s;
+                opacity: 0;
+                padding: 3px;
+                cursor: pointer;
+                transform: rotate(10deg);
+                background: white;
+            }
+            &:hover svg {
+                animation: 0.3s edit ease-in-out;
+                animation-fill-mode: forwards;
+            }
+            p {
+                outline: none;
+                border: none;
+                background: rgba(190, 190, 190, 0);
+                width: 100%;
+                padding: 0;
+                text-overflow: wrap;
+                color: white;
+                text-align: center;
+                resize: none;
+                overflow: hidden;
+                margin: 0;
+                font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
+                cursor: pointer;
+                &:focus {
+                    background: rgba(150, 150, 150, 0.5);
+                }
+            }
+        }
+        .group-red{
+            background: $group-red;
+        }
+        .group-orange {
+            background: $group-orange;
+        }
+        .group-yellow {
+            background: $group-yellow;
+        }
+        .group-green {
+            background: $group-green;
+        }
+        .group-blue {
+            background: $group-blue;
+        }
+        .group-purple {
+            background: $group-purple;
+        }
+    }
+}
+
+@keyframes edit {
+    0% {
+        opacity: 0;
+        transform: rotate(10deg);
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        transform: rotate(-10deg);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(0deg);
+    }
+}
+
+
+
+@media screen and (max-width: 1000px) {
+
+    .wrap {
+        height: 80vh;
+        width: 60vw;
+        .sidebar {
+            width: 60vw;
+            height: 5vw;
+            bottom: 0;
+        }
+    }
+    
+    
+
+
+
 }
