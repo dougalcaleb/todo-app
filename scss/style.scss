@@ -34,7 +34,7 @@ body {
     overflow: hidden;
     .sidebar {
         height: 40vw;
-        width: 5vw;
+        width: 10vh;
         background: #dedede;
         position: absolute;
         border-radius: 5px;
@@ -49,6 +49,7 @@ body {
             padding: 10px;
             margin: 10px;
             position: relative;
+            word-wrap: break-word;;
             svg {
                 position: absolute;
                 // border: 2px solid #444;
@@ -83,9 +84,6 @@ body {
                 margin: 0;
                 font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
                 cursor: pointer;
-                &:focus {
-                    background: rgba(150, 150, 150, 0.5);
-                }
             }
         }
         .group-red{
@@ -135,8 +133,15 @@ body {
         width: 60vw;
         .sidebar {
             width: 60vw;
-            height: 5vw;
+            height: 5vh;
             bottom: 0;
+            flex-direction: row;
+            .group {
+                padding: 5px;
+            }
+            // p {
+
+            // }
         }
     }
     

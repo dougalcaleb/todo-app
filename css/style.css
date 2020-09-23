@@ -39,7 +39,7 @@ body {
 }
 .wrap .sidebar {
   height: 40vw;
-  width: 5vw;
+  width: 10vh;
   background: #dedede;
   position: absolute;
   border-radius: 5px;
@@ -55,6 +55,7 @@ body {
   padding: 10px;
   margin: 10px;
   position: relative;
+  word-wrap: break-word;
 }
 .wrap .sidebar .group svg {
   position: absolute;
@@ -89,9 +90,6 @@ body {
   margin: 0;
   font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
   cursor: pointer;
-}
-.wrap .sidebar .group p:focus {
-  background: rgba(150, 150, 150, 0.5);
 }
 .wrap .sidebar .group-red {
   background: red;
@@ -135,7 +133,11 @@ body {
   }
   .wrap .sidebar {
     width: 60vw;
-    height: 5vw;
+    height: 5vh;
     bottom: 0;
+    flex-direction: row;
+  }
+  .wrap .sidebar .group {
+    padding: 5px;
   }
 }
