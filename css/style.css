@@ -1,0 +1,31 @@
+/*
+%name - reusable styles (used @extend %name)
+@mixin name - function (used @include name(param))
+$name - variable
+
+*/
+.bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+* {
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #0c132d;
+}
+
+.bg {
+  background: url("../images/bg1.jpg");
+  background-size: cover;
+  background-position: center center;
+  filter: blur(5px);
+}
