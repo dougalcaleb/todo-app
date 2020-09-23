@@ -4,10 +4,24 @@
 $name - variable
 
 */
-.bg, .wrap {
+.bg, .wrap, .menu .new-general, .menu .new-general svg, .menu .new-check svg, .menu .new-note svg {
   position: absolute;
   left: 0;
   right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.menu .new-check, .menu .new-note {
+  position: absolute;
   top: 0;
   bottom: 0;
   margin: auto;
@@ -35,7 +49,6 @@ body {
   width: 60vw;
   background: rgba(150, 150, 150, 0.25);
   border-radius: 5px;
-  overflow: hidden;
 }
 .wrap .sidebar {
   height: 40vw;
@@ -110,6 +123,76 @@ body {
   background: purple;
 }
 
+.tabs {
+  background: #dedede;
+  position: absolute;
+  border-radius: 5px;
+  height: 3vh;
+  width: calc(100% - 10vh - 5px);
+  right: 0;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.5vh;
+  box-sizing: border-box;
+}
+.tabs .active-group {
+  background: green;
+  font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
+  padding-left: 3px;
+  padding-right: 3px;
+  height: 2vh;
+  box-sizing: border-box;
+  border-radius: 5px;
+  overflow: none;
+  color: white;
+}
+
+.menu {
+  background: rgba(150, 150, 150, 0.25);
+  width: 30vh;
+  height: 10vh;
+  border-radius: 5px;
+  bottom: -11vh;
+  cursor: pointer;
+}
+.menu .new-general {
+  border-radius: 5px;
+  height: 80%;
+  background: white;
+  width: 10vh;
+  transition: 0.2s;
+}
+.menu .new-general:hover {
+  box-shadow: 0px 4px 5px #565656;
+  top: -6px;
+}
+.menu .new-general svg {
+  height: 80%;
+  color: #545454;
+}
+.menu .new-check, .menu .new-note {
+  border-radius: 5px;
+  height: 6vh;
+  width: 6vh;
+  background: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.menu .new-check:hover, .menu .new-note:hover {
+  box-shadow: 0px 4px 5px #565656;
+  top: -6px;
+}
+.menu .new-check svg, .menu .new-note svg {
+  height: 60%;
+  color: #545454;
+}
+.menu .new-check {
+  right: 20px;
+}
+.menu .new-note {
+  left: 20px;
+}
+
 @keyframes edit {
   0% {
     opacity: 0;
@@ -130,6 +213,7 @@ body {
   .wrap {
     height: 80vh;
     width: 60vw;
+    top: -10vh;
   }
   .wrap .sidebar {
     width: 60vw;

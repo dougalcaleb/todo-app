@@ -7,6 +7,8 @@ $group-green: green;
 $group-blue: blue;
 $group-purple: purple;
 
+$group-stack: "Ubuntu", "Work Sans", monospace, sans-serif;
+
 
 * {
     user-select: none;
@@ -31,7 +33,7 @@ body {
     background: rgba(150, 150, 150, 0.25);
     @extend %center;
     border-radius: 5px;
-    overflow: hidden;
+    // overflow: hidden;
     .sidebar {
         height: 40vw;
         width: 10vh;
@@ -49,7 +51,7 @@ body {
             padding: 10px;
             margin: 10px;
             position: relative;
-            word-wrap: break-word;;
+            word-wrap: break-word;
             svg {
                 position: absolute;
                 // border: 2px solid #444;
@@ -82,7 +84,7 @@ body {
                 resize: none;
                 overflow: hidden;
                 margin: 0;
-                font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
+                font-family: $group-stack;
                 cursor: pointer;
             }
         }
@@ -104,6 +106,82 @@ body {
         .group-purple {
             background: $group-purple;
         }
+    }
+}
+
+.tabs {
+    background: #dedede;
+    position: absolute;
+    border-radius: 5px;
+    height: 3vh;
+    width: calc(100% - 10vh - 5px);
+    right: 0;
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.5vh;
+    box-sizing: border-box;
+    .active-group {
+        background: $group-green;
+        font-family: $group-stack;
+        padding-left: 3px;
+        padding-right: 3px;
+        height: 2vh;
+        box-sizing: border-box;
+        border-radius: 5px;
+        overflow: none;
+        color: white;
+    }
+}
+
+.menu {
+    @extend %center-x;
+    // background: orange;
+    background: rgba(150, 150, 150, 0.25);
+    width: 30vh;
+    height: 10vh;
+    border-radius: 5px;
+    bottom: -11vh;
+    cursor: pointer;
+    .new-general {
+        border-radius: 5px;
+        height: 80%;
+        background: white;
+        width: 10vh;
+        @extend %center;
+        transition: 0.2s;
+        &:hover {
+            box-shadow: 0px 4px 5px #565656;
+            top: -6px;
+        }
+        svg {
+            height: 80%;
+            @extend %center;
+            color: #545454;
+        }
+    }
+    .new-check, .new-note {
+        border-radius: 5px;
+        height: 6vh;
+        width: 6vh;
+        background: white;
+        @extend %center-y;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+            box-shadow: 0px 4px 5px #565656;
+            top: -6px;
+        }
+        svg {
+            height: 60%;
+            @extend %center;
+            color: #545454;
+        }
+    }
+    .new-check {
+        right: 20px;
+    }
+    .new-note {
+        left: 20px;
     }
 }
 
@@ -131,6 +209,7 @@ body {
     .wrap {
         height: 80vh;
         width: 60vw;
+        top: -10vh;
         .sidebar {
             width: 60vw;
             height: 5vh;
@@ -139,14 +218,7 @@ body {
             .group {
                 padding: 5px;
             }
-            // p {
-
-            // }
         }
     }
-    
-    
-
-
 
 }

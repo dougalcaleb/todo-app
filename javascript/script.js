@@ -1,3 +1,5 @@
+var activeGroup = "Group Title";
+
 function noteEdits() {
     for(var a = 0; a < document.querySelectorAll(".group-edit").length; a++) {
         document.querySelectorAll(".group-edit")[a].addEventListener("click", function() {
