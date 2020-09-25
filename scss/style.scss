@@ -45,7 +45,6 @@ body {
         text-align: center;
         line-height: 50px;
         color: white;
-        // padding-left: 20px;
         box-sizing: border-box;
         font-family: $primary-stack;
         font-size: 22px;
@@ -58,7 +57,6 @@ body {
         text-align: center;
         line-height: 50px;
         color: white;
-        // padding-left: 20px;
         box-sizing: border-box;
         font-family: $primary-stack;
         font-size: 22px;
@@ -69,7 +67,6 @@ body {
             height: 100%;
             svg {
                 height: 25px;
-                // position: absolute;
                 color: $gray;
                 cursor: pointer;
                 transition: 0.2s;
@@ -103,23 +100,16 @@ body {
             text-align: center;
             border-radius: 5px;
             color: white;
-            // padding: 10px;
             margin: 10px;
             margin-left: 0;
             margin-right: 20px;
             padding-right: 20px;
             padding-left: 20px;
-            // position: relative;
             word-wrap: break-word;
             transition: 0.3s;
-            // overflow: hidden;
             .group-menu {
-                // background: orange;
-                // position: relative;
                 height: 20px;
                 width: calc(100% + 20px);
-                // bottom: -25px;
-                // top: 10px;
                 left: 0;
                 display: flex;
                 justify-content: space-evenly;
@@ -148,7 +138,6 @@ body {
             .group-title {
                 outline: none;
                 border: none;
-                // background: rgba(190, 190, 190, 0);
                 width: 100%;
                 padding: 10px;
                 text-overflow: wrap;
@@ -161,7 +150,6 @@ body {
                 font-family: $group-stack;
                 cursor: pointer;
                 z-index: 5;
-                // background: orange;
                 border-radius: 5px;
             }
         }
@@ -173,7 +161,6 @@ body {
         background: $group-inactive;
     }
     .group-menu {
-        // top: -20px;
         margin-top: -20px;
         svg {
             top: -30px;
@@ -181,7 +168,6 @@ body {
     }
     .group-notes {
         border-left: 2px solid $group-inactive;
-        // height: 0;
         opacity: 0;
         bottom: 0px;
         display: none;
@@ -192,8 +178,6 @@ body {
         background: $group-active;
     }
     .group-menu {
-        // display: block;
-        // top: 5px;
         margin-top: 5px;
         svg {
             top: 0px;
@@ -201,22 +185,18 @@ body {
     }
     .group-notes {
         border-left: 2px solid $group-active;
-        // top: 20px;
         margin-top: 10px;
         opacity: 1;
         visibility: visible;
-        // display: inline;
     }
 }
 
 .group-notes {
     position: relative;
-    // background: orange;
     width: calc(100% - 5px);
     left: 5px;
     margin-top: -10px;
     box-sizing: border-box;
-    // padding-top: 30px;
     padding-left: 15px;
     text-align: left;
     transition: 0.3s;
@@ -261,7 +241,6 @@ body {
     background: rgba(150, 150, 150, 0.25);
     width: 20vh;
     height: 80px;
-    // border-radius: 5px;
     border-bottom-left-radius: 5px;
     bottom: 0;
     left: 0;
