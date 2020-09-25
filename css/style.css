@@ -1,11 +1,10 @@
-@charset "UTF-8";
 /*
 %name - reusable styles (used @extend %name)
 @mixin name - function (used @include name(param))
 $name - variable
 
 */
-.bg, .wrap, .menu .new-general, .menu .new-general svg, .menu .new-check svg, .menu .new-note svg {
+.bg, .wrap, .menu .new-check svg, .menu .new-note svg, .menu .new-general svg, .menu .new-general {
   position: absolute;
   left: 0;
   right: 0;
@@ -14,14 +13,7 @@ $name - variable
   margin: auto;
 }
 
-.menu {
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin: auto;
-}
-
-.group-active-i, .tabs .tab:hover:after, .menu .new-check, .menu .new-note {
+.group-active-i, .menu .new-check, .menu .new-note, .menu .new-general {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -47,20 +39,68 @@ body {
 
 .wrap {
   height: 40vw;
-  width: 60vw;
+  width: 70vw;
   background: rgba(150, 150, 150, 0.25);
   border-radius: 5px;
 }
+.wrap .sidebar-head {
+  height: 50px;
+  width: 20vh;
+  background: rgba(150, 150, 150, 0.25);
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  box-sizing: border-box;
+  font-family: "Work Sans", "Ubuntu", sans-serif;
+  font-size: 22px;
+  border-top-left-radius: 5px;
+}
+.wrap .sidebar-tools {
+  height: 40px;
+  width: 20vh;
+  background: white;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  box-sizing: border-box;
+  font-family: "Work Sans", "Ubuntu", sans-serif;
+  font-size: 22px;
+  position: relative;
+}
+.wrap .sidebar-tools .tool-wrap {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+}
+.wrap .sidebar-tools .tool-wrap svg {
+  height: 25px;
+  color: #545454;
+  cursor: pointer;
+  transition: 0.2s;
+  align-self: center;
+}
+.wrap .sidebar-tools .tool-wrap svg:hover {
+  color: #333;
+}
+.wrap .sidebar-tools .tool-desc {
+  margin: 0;
+  position: absolute;
+  bottom: 0;
+  height: 15px;
+  color: #545454;
+  font-size: 12px;
+  line-height: 15px;
+  width: 100%;
+  font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
+}
 .wrap .sidebar {
-  height: 40vw;
-  width: 10vh;
+  height: calc(40vw - 120px);
+  width: 20vh;
   background: #dedede;
   position: absolute;
-  border-radius: 5px;
   left: 0;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  overflow: auto;
+  top: 90px;
 }
 .wrap .sidebar .group {
   text-align: center;
@@ -68,27 +108,37 @@ body {
   color: white;
   padding: 10px;
   margin: 10px;
+  padding-right: 20px;
   position: relative;
   word-wrap: break-word;
 }
-.wrap .sidebar .group .group-edit {
+.wrap .sidebar .group .group-menu {
   position: absolute;
-  border-radius: 100%;
   height: 20px;
-  width: 20px;
-  right: -5px;
-  bottom: -5px;
-  color: #545454;
-  transition: 0.2s;
-  opacity: 0;
-  padding: 3px;
-  cursor: pointer;
-  transform: rotate(10deg);
-  background: white;
+  width: 100%;
+  bottom: -25px;
+  left: 0;
+  display: flex;
+  justify-content: space-evenly;
+  border: none;
+  overflow: hidden;
 }
-.wrap .sidebar .group:hover .group-edit {
-  animation: 0.3s edit ease-in-out;
-  animation-fill-mode: forwards;
+.wrap .sidebar .group .group-menu svg {
+  height: 20px;
+  color: #545454;
+  cursor: pointer;
+  transition: 0.1s;
+  position: relative;
+  transition-timing-function: cubic-bezier(0.2, 0.5, 0, 1);
+}
+.wrap .sidebar .group .group-menu svg:hover {
+  color: #222;
+}
+.wrap .sidebar .group .group-menu .group-menu-edit {
+  transition-delay: 0.1s;
+}
+.wrap .sidebar .group .group-menu .group-menu-select {
+  transition-delay: 0.2s;
 }
 .wrap .sidebar .group p {
   outline: none;
@@ -105,23 +155,16 @@ body {
   font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
   cursor: pointer;
 }
-.wrap .sidebar .group-red {
-  background: red;
+
+.group-inactive .group-menu svg {
+  top: -30px;
 }
-.wrap .sidebar .group-orange {
-  background: orange;
-}
-.wrap .sidebar .group-yellow {
-  background: yellow;
-}
-.wrap .sidebar .group-green {
+
+.group-active {
   background: green;
 }
-.wrap .sidebar .group-blue {
-  background: blue;
-}
-.wrap .sidebar .group-purple {
-  background: purple;
+.group-active .group-menu svg {
+  top: 0;
 }
 
 .group-active-i {
@@ -134,103 +177,51 @@ body {
   opacity: 1;
 }
 
-.tabs {
-  background: #dedede;
-  position: absolute;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  height: 3vh;
-  width: calc(100% - 10vh - 5px);
-  right: 0;
-  display: flex;
-  justify-content: flex-start;
-  box-sizing: border-box;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-.tabs .tab {
-  background: #ffffff;
-  font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
-  padding-left: 9px;
-  padding-right: 29px;
-  height: 3vh;
-  box-sizing: border-box;
-  overflow: none;
-  color: #545454;
-  border-right: 1px solid #cdcdcd;
-  font-family: monospace;
-  font-weight: 700;
-  line-height: 3vh;
-  cursor: pointer;
-  position: relative;
-}
-.tabs .tab:hover:after {
-  content: "×";
-  font-size: 25px;
-  top: -1px;
-  right: 9px;
-}
-.tabs .active-tab {
-  background: #ccc;
+.group-inactive {
+  background: gray;
 }
 
 .active {
   background: #ccc;
-  height: calc(100% - 3vh);
-  width: calc(100% - 10vh - 5px);
+  height: 100%;
+  width: calc(100% - 20vh);
   position: absolute;
   right: 0;
   bottom: 0;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
 }
 
 .menu {
+  position: absolute;
   background: rgba(150, 150, 150, 0.25);
-  width: 30vh;
-  height: 10vh;
-  border-radius: 5px;
-  bottom: -11vh;
+  width: 20vh;
+  height: 80px;
+  border-bottom-left-radius: 5px;
+  bottom: 0;
+  left: 0;
   cursor: pointer;
 }
-.menu .new-general {
+.menu .new-check, .menu .new-note, .menu .new-general {
   border-radius: 5px;
-  height: 80%;
-  background: white;
-  width: 10vh;
-  transition: 0.2s;
-}
-.menu .new-general:hover {
-  box-shadow: 0px 4px 5px #565656;
-  top: -6px;
-}
-.menu .new-general svg {
-  height: 80%;
-  color: #545454;
-}
-.menu .new-check, .menu .new-note {
-  border-radius: 5px;
-  height: 6vh;
-  width: 6vh;
+  height: 5vh;
+  width: 5vh;
   background: white;
   cursor: pointer;
   transition: 0.2s;
 }
-.menu .new-check:hover, .menu .new-note:hover {
-  box-shadow: 0px 4px 5px #565656;
+.menu .new-check:hover, .menu .new-note:hover, .menu .new-general:hover {
+  box-shadow: 0px 4px 5px #5e5e5e;
   top: -6px;
 }
-.menu .new-check svg, .menu .new-note svg {
+.menu .new-check svg, .menu .new-note svg, .menu .new-general svg {
   height: 60%;
   color: #545454;
 }
 .menu .new-check {
-  right: 20px;
+  right: 10px;
 }
 .menu .new-note {
-  left: 20px;
+  left: 10px;
 }
-
 @keyframes edit {
   0% {
     opacity: 0;
@@ -262,4 +253,22 @@ body {
   .wrap .sidebar .group {
     padding: 5px;
   }
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin-right: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #777;
+  border-right: 5px solid #dedede;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
 }

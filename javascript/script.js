@@ -1,38 +1,47 @@
 var activeGroup = "Group Title";
 
 function noteEdits() {
-    for(var a = 0; a < document.querySelectorAll(".group-edit").length; a++) {
-        document.querySelectorAll(".group-edit")[a].addEventListener("click", function() {
-            this.parentNode.children[0].setAttribute("contenteditable", "true");
-            this.parentNode.children[0].focus();
+    for(var a = 0; a < document.querySelectorAll(".group-menu-edit").length; a++) {
+        document.querySelectorAll(".group-menu-edit")[a].addEventListener("click", function() {
+            this.parentNode.parentNode.children[0].setAttribute("contenteditable", "true");
+            this.parentNode.parentNode.children[0].focus();
             
             var range = document.createRange();
-            range.selectNodeContents(this.parentNode.children[0]);
+            range.selectNodeContents(this.parentNode.parentNode.children[0]);
             var selection = window.getSelection();
             selection.removeAllRanges();
-            selection.addRange(range);
-            
-            this.style.visibility = "hidden";
+            selection.addRange(range);            
 
-            this.parentNode.children[0].addEventListener("keydown", function(event) {
+            this.parentNode.parentNode.children[0].addEventListener("keydown", function(event) {
                 if (event.keyCode === 13) {
                     this.parentNode.children[0].blur();
                 }
             });
 
-            this.parentNode.children[0].addEventListener("blur", function() {
+            this.parentNode.parentNode.children[0].addEventListener("blur", function() {
                 if (this.innerHTML === "") {
                     this.innerHTML = "Group Title";
                 }
                 this.setAttribute("contenteditable", "false");
-                this.parentNode.children[1].style.visibility = "visible";
             });
         });
     }
 
-    for (var b = 0; b < document.querySelectorAll(".tab").length; b++) {
-        document.querySelectorAll(".tab")[b].children[0];
-    }
+    // for (var b = 0; b < document.querySelectorAll(".group-menu").length; b++) {
+        // document.querySelectorAll(".group-menu-open")[b].addEventListener("mouseover", function() {
+        //     this.parentNode.classList.add("group-menu-active");
+        //     this.parentNode.classList.remove("group-menu-inactive");
+        // });
+        // document.querySelectorAll(".group-menu")[b].addEventListener("mouseout", function() {
+        //     this.classList.remove("group-menu-active");
+        //     this.classList.add("group-menu-inactive");
+        // });
+    // }
 }
+
+document.querySelector(".group-inactive").addEventListener("click", function() {
+    this.classList.add("group-active");
+    this.classList.remove("group-inactive");
+});
 
 noteEdits();
