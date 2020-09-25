@@ -27,21 +27,14 @@ function noteEdits() {
         });
     }
 
-    // for (var b = 0; b < document.querySelectorAll(".group-menu").length; b++) {
-        // document.querySelectorAll(".group-menu-open")[b].addEventListener("mouseover", function() {
-        //     this.parentNode.classList.add("group-menu-active");
-        //     this.parentNode.classList.remove("group-menu-inactive");
-        // });
-        // document.querySelectorAll(".group-menu")[b].addEventListener("mouseout", function() {
-        //     this.classList.remove("group-menu-active");
-        //     this.classList.add("group-menu-inactive");
-        // });
-    // }
+    for (var b = 0; b < document.querySelectorAll(".group").length; b++) {
+        document.querySelectorAll(".group")[b].addEventListener("click", function() {
+            this.classList.toggle("group-active");
+            this.classList.toggle("group-inactive");
+        });
+    }
 }
 
-document.querySelector(".group-inactive").addEventListener("click", function() {
-    this.classList.add("group-active");
-    this.classList.remove("group-inactive");
-});
+
 
 noteEdits();

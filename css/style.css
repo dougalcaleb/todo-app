@@ -13,7 +13,7 @@ $name - variable
   margin: auto;
 }
 
-.group-active-i, .menu .new-check, .menu .new-note, .menu .new-general {
+.menu .new-check, .menu .new-note, .menu .new-general {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -106,30 +106,32 @@ body {
   text-align: center;
   border-radius: 5px;
   color: white;
-  padding: 10px;
   margin: 10px;
+  margin-left: 0;
+  margin-right: 20px;
   padding-right: 20px;
-  position: relative;
+  padding-left: 20px;
   word-wrap: break-word;
+  transition: 0.3s;
 }
 .wrap .sidebar .group .group-menu {
-  position: absolute;
   height: 20px;
-  width: 100%;
-  bottom: -25px;
+  width: calc(100% + 20px);
   left: 0;
   display: flex;
   justify-content: space-evenly;
   border: none;
   overflow: hidden;
+  z-index: 1;
 }
 .wrap .sidebar .group .group-menu svg {
   height: 20px;
   color: #545454;
   cursor: pointer;
-  transition: 0.1s;
+  transition: 0.2s;
   position: relative;
-  transition-timing-function: cubic-bezier(0.2, 0.5, 0, 1);
+  transition-timing-function: cubic-bezier(0.2, 0.5, 0.2, 1.4);
+  z-index: 1;
 }
 .wrap .sidebar .group .group-menu svg:hover {
   color: #222;
@@ -140,45 +142,89 @@ body {
 .wrap .sidebar .group .group-menu .group-menu-select {
   transition-delay: 0.2s;
 }
-.wrap .sidebar .group p {
+.wrap .sidebar .group .group-title {
   outline: none;
   border: none;
-  background: rgba(190, 190, 190, 0);
   width: 100%;
-  padding: 0;
+  padding: 10px;
   text-overflow: wrap;
   color: white;
   text-align: center;
   resize: none;
   overflow: hidden;
+  position: relative;
   margin: 0;
   font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
   cursor: pointer;
+  z-index: 5;
+  border-radius: 5px;
 }
 
+.group-inactive .group-title {
+  background: #b6b6b6;
+}
+.group-inactive .group-menu {
+  margin-top: -20px;
+}
 .group-inactive .group-menu svg {
   top: -30px;
 }
+.group-inactive .group-notes {
+  border-left: 2px solid #b6b6b6;
+  opacity: 0;
+  bottom: 0px;
+  display: none;
+}
 
-.group-active {
-  background: green;
+.group-active .group-title {
+  background: #5969c0;
+}
+.group-active .group-menu {
+  margin-top: 5px;
 }
 .group-active .group-menu svg {
-  top: 0;
+  top: 0px;
 }
-
-.group-active-i {
-  left: -30px;
-  height: 20px;
-  opacity: 0;
-}
-
-.group-active .group-active-i {
+.group-active .group-notes {
+  border-left: 2px solid #5969c0;
+  margin-top: 10px;
   opacity: 1;
+  visibility: visible;
 }
 
-.group-inactive {
-  background: gray;
+.group-notes {
+  position: relative;
+  width: calc(100% - 5px);
+  left: 5px;
+  margin-top: -10px;
+  box-sizing: border-box;
+  padding-left: 15px;
+  text-align: left;
+  transition: 0.3s;
+}
+.group-notes:before {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 50px;
+  background: #5969c0;
+  left: -2px;
+  top: -50px;
+}
+.group-notes .note {
+  margin-top: 10px;
+  font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
+  position: relative;
+  transition: 0.3s;
+}
+.group-notes .note:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  width: 10px;
+  background: #5969c0;
+  left: -16px;
 }
 
 .active {
@@ -221,38 +267,6 @@ body {
 }
 .menu .new-note {
   left: 10px;
-}
-@keyframes edit {
-  0% {
-    opacity: 0;
-    transform: rotate(10deg);
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    transform: rotate(-10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-}
-@media screen and (max-width: 1000px) {
-  .wrap {
-    height: 80vh;
-    width: 60vw;
-    top: -10vh;
-  }
-  .wrap .sidebar {
-    width: 60vw;
-    height: 5vh;
-    bottom: 0;
-    flex-direction: row;
-  }
-  .wrap .sidebar .group {
-    padding: 5px;
-  }
 }
 ::-webkit-scrollbar {
   width: 10px;
