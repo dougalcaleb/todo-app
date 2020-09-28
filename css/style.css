@@ -217,6 +217,8 @@ body {
   font-family: "Ubuntu", "Work Sans", monospace, sans-serif;
   position: relative;
   transition: 0.3s;
+  outline: none;
+  cursor: pointer;
 }
 .group-notes .note:before {
   content: "";
@@ -226,6 +228,9 @@ body {
   width: 10px;
   background: #5969c0;
   left: -16px;
+}
+.group-notes .note:hover {
+  color: #222;
 }
 
 .active {

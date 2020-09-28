@@ -216,6 +216,8 @@ body {
         font-family: $group-stack;
         position: relative;
         transition: 0.3s;
+        outline: none;
+        cursor: pointer;
         &:before {
             content: "";
             @extend %center-y;
@@ -225,6 +227,9 @@ body {
             width: 10px;
             background: $group-active;
             left: -16px;
+        }
+        &:hover {
+            color: #222;
         }
     }
 }
