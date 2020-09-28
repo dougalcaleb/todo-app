@@ -234,6 +234,10 @@ body {
     }
 }
 
+.note-active {
+    color: $group-active;
+}
+
 .active {
     background: #ccc;
     height: 100%;

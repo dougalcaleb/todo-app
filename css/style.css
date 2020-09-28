@@ -233,6 +233,10 @@ body {
   color: #222;
 }
 
+.note-active {
+  color: #5969c0;
+}
+
 .active {
   background: #ccc;
   height: 100%;
