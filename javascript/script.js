@@ -38,6 +38,11 @@ function newGroup() {
         document.querySelector(".g"+activeGroup).classList.remove("group-active");
         document.querySelector(".g"+activeGroup).classList.add("group-inactive");
     }
+
+    var nnp = document.createElement("DIV");
+    nnp.classList.add("np-"+nextFree+"-0", "active-page", "note-page");
+    document.querySelector(".active").appendChild(nnp);
+
     activeGroup = (nextFree/1);
     nextFree++;
     notePreEdits();
@@ -63,7 +68,11 @@ function newNote(group) {
 
         activeNote = (nextNote/1);
 
-        console.log("Active note is "+activeNote);
+        // console.log("Active note is "+activeNote);
+
+        var nnp = document.createElement("DIV");
+        nnp.classList.add("np"+nextNote, "active-page", "note-page");
+        document.querySelector(".active").appendChild(nnp);
 
         notePreEdits();
 
@@ -94,13 +103,6 @@ function notePreEdits() {
 }
 
 function noteEdits() {
-
-    // var cloneFrom = document.querySelector(".wrap");
-    // var cloneTo = cloneFrom.cloneNode(true);
-
-    // console.log(cloneTo);
-
-    // cloneFrom.parentNode.replaceChild(cloneTo, cloneFrom);
 
     // group title edit via "e" press (event sent in keydn), via edit btn click, or via new group btn
     for(var a = 0; a < document.querySelectorAll(".group-menu-edit").length; a++) {
@@ -225,7 +227,10 @@ function noteEdits() {
     for (var e = 0; e < document.querySelectorAll(".group-menu-delete").length; e++) {
         document.querySelectorAll(".group-menu-delete")[e].addEventListener("click", function() {
             // this.parentNode.parentNode.remove();
-            this.parentNode.parentNode.style.display = "none";
+            this.parentNode.parentNode.style.animation = "delete 0.4s ease-out 0s 1 normal forwards";
+            setTimeout(remove= () => {
+                this.parentNode.parentNode.style.display = "none";
+            }, 500);
         });
     }
 
@@ -274,7 +279,7 @@ function selectAllGroups(onlyVis) {
         document.querySelector(".select-deselect-all").innerHTML = '<path fill="currentColor" d="M22,16A2,2 0 0,1 20,18H8C6.89,18 6,17.1 6,16V4C6,2.89 6.89,2 8,2H20A2,2 0 0,1 22,4V16M16,20V22H4A2,2 0 0,1 2,20V7H4V20H16M13,14L20,7L18.59,5.59L13,11.17L9.91,8.09L8.5,9.5L13,14Z" />';
     } else {
         if (!selected.includes(false)) { // unckecking all
-            console.log("Selected included no falses");
+            // console.log("Selected included no falses");
             document.querySelector(".select-deselect-all").innerHTML = '<path fill="currentColor" d="M20,16V4H8V16H20M22,16A2,2 0 0,1 20,18H8C6.89,18 6,17.1 6,16V4C6,2.89 6.89,2 8,2H20A2,2 0 0,1 22,4V16M16,20V22H4A2,2 0 0,1 2,20V7H4V20H16Z" />';
             for (let a = 0; a < selected.length; a++) {
                 selected[a] = false;

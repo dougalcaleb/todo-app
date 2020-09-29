@@ -133,6 +133,7 @@ body {
             padding-left: 20px;
             word-wrap: break-word;
             transition: 0.3s;
+            animation-fill-mode: forwards;
             .group-menu {
                 height: 20px;
                 width: calc(100% + 20px);
@@ -308,6 +309,18 @@ body {
 
 .active-page {
     z-index: 1;
+    opacity: 1;
+    background: white;
+}
+
+.inactive-page {
+    opacity: 0;
+}
+
+.note-page {
+    height: 100%;
+    width: 100%;
+    @extend %center;
 }
 
 .menu {
@@ -369,6 +382,21 @@ body {
 
 ::-webkit-scrollbar-button {
     display: none;
+}
+
+@keyframes delete {
+    0% {
+
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        // max-height: 0;
+        margin-top: -101px;
+        opacity: 0;
+        // background: orange;
+    }
 }
 
 @media screen and (max-width: 1000px) {

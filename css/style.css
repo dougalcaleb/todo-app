@@ -4,7 +4,7 @@
 $name - variable
 
 */
-.bg, .wrap, .active .initial-active, .menu .new-check svg, .menu .new-note svg, .menu .new-general svg, .menu .new-general {
+.bg, .wrap, .active .initial-active, .note-page, .menu .new-check svg, .menu .new-note svg, .menu .new-general svg, .menu .new-general {
   position: absolute;
   left: 0;
   right: 0;
@@ -137,6 +137,7 @@ body {
   padding-left: 20px;
   word-wrap: break-word;
   transition: 0.3s;
+  animation-fill-mode: forwards;
 }
 .wrap .sidebar .group .group-menu {
   height: 20px;
@@ -301,6 +302,17 @@ body {
 
 .active-page {
   z-index: 1;
+  opacity: 1;
+  background: white;
+}
+
+.inactive-page {
+  opacity: 0;
+}
+
+.note-page {
+  height: 100%;
+  width: 100%;
 }
 
 .menu {
@@ -356,4 +368,14 @@ body {
 
 ::-webkit-scrollbar-button {
   display: none;
+}
+
+@keyframes delete {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    margin-top: -101px;
+    opacity: 0;
+  }
 }
