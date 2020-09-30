@@ -29,21 +29,38 @@ function keydn(event) {
 }
 
 function newGroup() {
+
+    if (document.querySelector(".note-active") != null) {
+        document.querySelector(".note-active").classList.remove("note-active");
+    }
+    
     var ng = document.createElement("DIV");
     ng.classList.add("g"+nextFree, "group", "group-active");
     document.querySelector(".sidebar").appendChild(ng);
-    ng.innerHTML = "<p contenteditable='false' spellcheck='false' class='group-title'>Group Title</p><div class='group-menu' title='Delete, edit, or select this group'><svg viewBox='0 0 24 24' class='group-menu-delete' title='Delete this group'><path fill='currentColor' d='M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z' /></svg><svg viewBox='0 0 24 24' class='group-menu-edit' title='Edit this title'><path fill='currentColor' d='M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z' /></svg><svg viewBox='0 0 24 24' class='group-menu-select'><path fill='currentColor' title='Select this group' d='M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z' /></svg></div><div class='group-notes'>    <div class='note note-active n0'>New Note</div>    </div>";
+    ng.innerHTML = "<p contenteditable='false' spellcheck='false' class='group-title'>Group Title</p><div class='group-menu' title='Delete, edit, or select this group'><svg viewBox='0 0 24 24' class='group-menu-delete' title='Delete this group'><path fill='currentColor' d='M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z' /></svg><svg viewBox='0 0 24 24' class='group-menu-edit' title='Edit this title'><path fill='currentColor' d='M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z' /></svg><svg viewBox='0 0 24 24' class='group-menu-select'><path fill='currentColor' title='Select this group' d='M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z' /></svg></div><div class='group-notes'>    <div class='n"+(nextFree/1)+"-0 note note-active'>New Note</div>    </div>";
 
     if (activeGroup !== null) {
         document.querySelector(".g"+activeGroup).classList.remove("group-active");
         document.querySelector(".g"+activeGroup).classList.add("group-inactive");
     }
-
-    var nnp = document.createElement("DIV");
-    nnp.classList.add("np-"+nextFree+"-0", "active-page", "note-page");
-    document.querySelector(".active").appendChild(nnp);
+    
+    if (document.querySelectorAll(".active-page").length >= 1) {
+        document.querySelector(".active-page").classList.remove("active-page");
+    }
 
     activeGroup = (nextFree/1);
+    
+    var nnp = document.createElement("DIV");
+    // nnp.classList.add("np"+0, "active-page", "note-page");
+    nnp.classList.add("np-"+activeGroup+"-0", "active-page", "note-page");
+    document.querySelector(".active").appendChild(nnp);
+    nnp.innerHTML = "This is page "+0+" of group "+nextFree;
+
+    // document.querySelector(".n"+0).addEventListener("click", function() {
+    //     document.querySelector(".active-page").classList.remove("active-page");
+    //     document.querySelector(".note-page").classList.add("active-page");
+    // });
+
     nextFree++;
     notePreEdits();
     editing = true;
@@ -57,12 +74,14 @@ function newNote(group) {
         newGroup();
     } else {
         // if a group is selected, create a new note inside that group
-        for (var a = 0; a < document.querySelector(".g"+group).children[2].children.length; a++) {
-            document.querySelector(".g"+group).children[2].children[a].classList.remove("note-active");
-        }
+        // for (var a = 0; a < document.querySelector(".g"+group).children[2].children.length; a++) {
+        //     document.querySelector(".g"+group).children[2].children[a].classList.remove("note-active");
+        // }
+        document.querySelector(".note-active").classList.remove("note-active");
+
         var nn = document.createElement("DIV");
         var nextNote = document.querySelector(".g"+group).children[2].children.length;
-        nn.classList.add("note", "note-active", "n"+nextNote);
+        nn.classList.add("n"+activeGroup+"-"+nextNote, "note", "note-active");
         document.querySelector(".g"+group).children[2].appendChild(nn);
         nn.innerHTML = "New Note";
 
@@ -70,15 +89,23 @@ function newNote(group) {
 
         // console.log("Active note is "+activeNote);
 
+        document.querySelector(".active-page").classList.remove("active-page");
+
         var nnp = document.createElement("DIV");
-        nnp.classList.add("np"+nextNote, "active-page", "note-page");
+        nnp.classList.add("np-"+activeGroup+"-"+nextNote, "active-page", "note-page");
         document.querySelector(".active").appendChild(nnp);
+        nnp.innerHTML = "This is page "+nextNote+" of group "+activeGroup;
+
+        // document.querySelector(".n"+nextNote).addEventListener("click", function() {
+        //     document.querySelector(".active-page").classList.remove("active-page");
+        //     this.classList.add("active-page");
+        // });
 
         notePreEdits();
 
         editing = true;
         var e = new CustomEvent("dblclick");
-        document.querySelector(".n"+activeNote).dispatchEvent(e);
+        document.querySelector(".n"+activeGroup+"-"+activeNote).dispatchEvent(e);
     }   
 }
 
@@ -193,6 +220,18 @@ function noteEdits() {
         });
     }
 
+    // used to navigate instead of clicking on groups due to bugs with clicks
+    for (var ca = 0; ca < document.querySelectorAll(".group-title").length; ca++) {
+        document.querySelectorAll(".group-title")[ca].addEventListener("click", function() {
+            activeGroup = this.parentNode.classList[0].split("")[1];
+            document.querySelector(".note-active").classList.remove("note-active");
+            document.querySelector(".n"+activeGroup+"-0").classList.add("note-active");
+            document.querySelector(".active-page").classList.remove("active-page");
+            document.querySelector(".np-"+activeGroup+"-0").classList.add("active-page");
+        });
+    }
+
+    // editing of note title in nav
     for (var d = 0; d < document.querySelectorAll(".note").length; d++) {
         document.querySelectorAll(".note")[d].addEventListener("dblclick", function() {
 
@@ -224,9 +263,9 @@ function noteEdits() {
         });
     }
 
+    // removal of groups
     for (var e = 0; e < document.querySelectorAll(".group-menu-delete").length; e++) {
         document.querySelectorAll(".group-menu-delete")[e].addEventListener("click", function() {
-            // this.parentNode.parentNode.remove();
             this.parentNode.parentNode.style.animation = "delete 0.4s ease-out 0s 1 normal forwards";
             setTimeout(remove= () => {
                 this.parentNode.parentNode.style.display = "none";
@@ -234,6 +273,7 @@ function noteEdits() {
         });
     }
 
+    // select and deselect groups
     for (var f = 0; f < document.querySelectorAll(".group-menu-select").length; f++) {
         document.querySelectorAll(".group-menu-select")[f].addEventListener("click", function() {
             if (this.innerHTML == '<path fill="currentColor" d="M10,17L5,12L6.41,10.58L10,14.17L17.59,6.58L19,8M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3Z"></path>') {
@@ -251,6 +291,17 @@ function noteEdits() {
             if (!selected.includes(true)) {
                 toggleOmniSelect();
             }
+        });
+    }
+
+    // show active notes when a note is clicked in nav
+    for (var g = 0; g < document.querySelectorAll(".note").length; g++) {
+        document.querySelectorAll(".note")[g].addEventListener("click", function() {
+            document.querySelector(".note-active").classList.remove("note-active");
+            this.classList.add("note-active");
+            activeNote = this.classList[0].split("-")[1];
+            document.querySelector(".active-page").classList.remove("active-page");
+            document.querySelector(".np-"+activeGroup+"-"+activeNote).classList.add("active-page");
         });
     }
 
