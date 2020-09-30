@@ -51,15 +51,9 @@ function newGroup() {
     activeGroup = (nextFree/1);
     
     var nnp = document.createElement("DIV");
-    // nnp.classList.add("np"+0, "active-page", "note-page");
     nnp.classList.add("np-"+activeGroup+"-0", "active-page", "note-page");
     document.querySelector(".active").appendChild(nnp);
     nnp.innerHTML = "This is page "+0+" of group "+nextFree;
-
-    // document.querySelector(".n"+0).addEventListener("click", function() {
-    //     document.querySelector(".active-page").classList.remove("active-page");
-    //     document.querySelector(".note-page").classList.add("active-page");
-    // });
 
     nextFree++;
     notePreEdits();
@@ -73,10 +67,7 @@ function newNote(group) {
     if (document.querySelectorAll(".group").length === 0) {
         newGroup();
     } else {
-        // if a group is selected, create a new note inside that group
-        // for (var a = 0; a < document.querySelector(".g"+group).children[2].children.length; a++) {
-        //     document.querySelector(".g"+group).children[2].children[a].classList.remove("note-active");
-        // }
+        
         document.querySelector(".note-active").classList.remove("note-active");
 
         var nn = document.createElement("DIV");
@@ -87,19 +78,12 @@ function newNote(group) {
 
         activeNote = (nextNote/1);
 
-        // console.log("Active note is "+activeNote);
-
         document.querySelector(".active-page").classList.remove("active-page");
 
         var nnp = document.createElement("DIV");
         nnp.classList.add("np-"+activeGroup+"-"+nextNote, "active-page", "note-page");
         document.querySelector(".active").appendChild(nnp);
         nnp.innerHTML = "This is page "+nextNote+" of group "+activeGroup;
-
-        // document.querySelector(".n"+nextNote).addEventListener("click", function() {
-        //     document.querySelector(".active-page").classList.remove("active-page");
-        //     this.classList.add("active-page");
-        // });
 
         notePreEdits();
 
@@ -311,6 +295,7 @@ function noteEdits() {
     }
 }
 
+// show / hide "Select All" section
 function toggleOmniSelect() {
     if (selectAllVis) {
         document.querySelector(".sidebar").style.height = "calc(40vw - 80px";
@@ -325,6 +310,7 @@ function toggleOmniSelect() {
     }
 }
 
+// select and deselect all groups
 function selectAllGroups(onlyVis) {
     if (onlyVis) {
         document.querySelector(".select-deselect-all").innerHTML = '<path fill="currentColor" d="M22,16A2,2 0 0,1 20,18H8C6.89,18 6,17.1 6,16V4C6,2.89 6.89,2 8,2H20A2,2 0 0,1 22,4V16M16,20V22H4A2,2 0 0,1 2,20V7H4V20H16M13,14L20,7L18.59,5.59L13,11.17L9.91,8.09L8.5,9.5L13,14Z" />';
