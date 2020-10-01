@@ -6,6 +6,7 @@ var selectAllVis = false;
 var selected = [];
 
 document.querySelector(".new-general").addEventListener("click", newGroup);
+document.querySelector(".new-check").addEventListener("click", newChecklist);
 document.querySelector(".new-note").addEventListener("click", function() {
     newNote(activeGroup);
 });
@@ -35,7 +36,7 @@ function newGroup() {
     }
     
     var ng = document.createElement("DIV");
-    ng.classList.add("g"+nextFree, "group", "group-active");
+    ng.classList.add("g"+nextFree, "group", "group-active", "usable");
     document.querySelector(".sidebar").appendChild(ng);
     ng.innerHTML = "<p contenteditable='false' spellcheck='false' class='group-title'>Group Title</p><div class='group-menu' title='Delete, edit, or select this group'><svg viewBox='0 0 24 24' class='group-menu-delete' title='Delete this group'><path fill='currentColor' d='M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M9,8H11V17H9V8M13,8H15V17H13V8Z' /></svg><svg viewBox='0 0 24 24' class='group-menu-edit' title='Edit this title'><path fill='currentColor' d='M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z' /></svg><svg viewBox='0 0 24 24' class='group-menu-select'><path fill='currentColor' title='Select this group' d='M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,5V19H5V5H19Z' /></svg></div><div class='group-notes'>    <div class='n"+(nextFree/1)+"-0 note note-active'>New Note</div>    </div>";
 
@@ -53,7 +54,9 @@ function newGroup() {
     var nnp = document.createElement("DIV");
     nnp.classList.add("np-"+activeGroup+"-0", "active-page", "note-page");
     document.querySelector(".active").appendChild(nnp);
-    nnp.innerHTML = "This is page "+0+" of group "+nextFree;
+    nnp.style.background = rand_hex_color();
+
+    // nnp.innerHTML = "This is page "+0+" of group "+nextFree;
 
     nextFree++;
     notePreEdits();
@@ -83,7 +86,8 @@ function newNote(group) {
         var nnp = document.createElement("DIV");
         nnp.classList.add("np-"+activeGroup+"-"+nextNote, "active-page", "note-page");
         document.querySelector(".active").appendChild(nnp);
-        nnp.innerHTML = "This is page "+nextNote+" of group "+activeGroup;
+        nnp.style.background = rand_hex_color();
+        // nnp.innerHTML = "This is page "+nextNote+" of group "+activeGroup;
 
         notePreEdits();
 
@@ -91,6 +95,18 @@ function newNote(group) {
         var e = new CustomEvent("dblclick");
         document.querySelector(".n"+activeGroup+"-"+activeNote).dispatchEvent(e);
     }   
+}
+
+function newChecklist() {
+    if (document.querySelectorAll(".group").length === 0) {
+        newGroup();
+        newChecklist();
+    } else {
+        var newCL = document.createElement("DIV");
+        newCL.classList.add("checklist", "checklist-"+activeGroup+"-");
+        newCL.innerHTML = "<ul><li>New List Item</li></ul>";
+        document.querySelector(".active-page").appendChild(newCL);
+    }
 }
 
 function notePreEdits() {
@@ -102,6 +118,7 @@ function notePreEdits() {
     cloneFrom.parentNode.replaceChild(cloneTo, cloneFrom);
 
     document.querySelector(".new-general").addEventListener("click", newGroup);
+    document.querySelector(".new-check").addEventListener("click", newChecklist);
     document.querySelector(".new-note").addEventListener("click", function() {
         newNote(activeGroup);
     });
@@ -251,8 +268,25 @@ function noteEdits() {
     for (var e = 0; e < document.querySelectorAll(".group-menu-delete").length; e++) {
         document.querySelectorAll(".group-menu-delete")[e].addEventListener("click", function() {
             this.parentNode.parentNode.style.animation = "delete 0.4s ease-out 0s 1 normal forwards";
-            setTimeout(remove= () => {
+            this.parentNode.parentNode.classList.remove("usable");
+            setTimeout(remove = () => {
                 this.parentNode.parentNode.style.display = "none";
+                var groupId = this.parentNode.parentNode.classList[0].split("g")[1];
+                var found = 0;
+                for (var a = 0; a < document.querySelectorAll(".note-page").length; a++) {
+                    if (document.querySelectorAll(".note-page")[a].classList[0].split("-")[1] == groupId && document.querySelector(".np-"+groupId+"-"+found) != null) {
+                        document.querySelector(".np-"+groupId+"-"+found).style.display = "none";
+                        found++;
+                    }
+                }
+                var lastPossible = 0;
+                for (var b = 0; b < document.querySelectorAll(".group").length; b++) {
+                    if (document.querySelectorAll(".group")[b].classList.contains("usable")) {
+                        lastPossible = (b/1);
+                    }
+                }
+                var e = new CustomEvent("click");
+                document.querySelector(".g"+lastPossible).dispatchEvent(e);
             }, 500);
         });
     }
